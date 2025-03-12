@@ -76,7 +76,7 @@ oauth_shim.interpret = function (req, res, next) {
 	// Has the parameters been stored in the state attribute?
 	try {
 		// decompose the p.state, redefine p
-		p = merge(p, JSON.parse(p.state));
+		p = merge(p, p.state.startsWith('%7B') ? JSON.parse(p.state) : JSON.parse(atob(p.state)));
 		p.state = state; // set this back to the string
 	} catch (e) {
 		console.error(e);
