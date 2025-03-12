@@ -1,17 +1,20 @@
 //
 // Implement oauth-shim with a webservice
 //
-
-var oauthshim = require('./src/oauth-shim');
-var url = require('url');
+const oauthshim = require('./src/oauth-shim');
+const url = require('url');
 
 oauthshim.listen = function(server, requestPathname) {
+	console.warn('oauthshim.listen called');
 
 	// Store old Listeners
-	var oldListeners = server.listeners('request');
+	const oldListeners = server.listeners('request');
 	server.removeAllListeners('request');
 
 	server.on('request', function(req, res) {
+		console.debug('request event emitted');
+		console.debug(req);
+		console.debug(res);
 
 		// Lets let something else handle this.
 		// Trigger all oldListeners
