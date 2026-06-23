@@ -19,6 +19,12 @@ module.exports = function(p, callback) {
 			grant_type: 'authorization_code',
 			redirect_uri: encodeURIComponent(p.redirect_uri)
 		};
+
+		// PKCE: forward the code_verifier when the client supplied one
+		// (e.g. X/Twitter OAuth2). Conditional so non-PKCE providers are unaffected.
+		if (p.code_verifier) {
+			post.code_verifier = p.code_verifier;
+		}
 	}
 	else if (p.refresh_token) {
 		post = {
