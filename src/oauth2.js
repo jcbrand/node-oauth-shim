@@ -60,7 +60,7 @@ module.exports = function(p, callback) {
 
 	// Workaround for Vimeo, which requires an extra Authorization header
 	if (p.authorisation === 'header') {
-		r.headers.Authorization = 'basic ' + new Buffer(p.client_id + ':' + p.client_secret).toString('base64');
+		r.headers.Authorization = 'Basic ' + new Buffer(p.client_id + ':' + p.client_secret).toString('base64');
 	}
 
 	//opts.body = post;
